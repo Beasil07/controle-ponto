@@ -1,0 +1,26 @@
+:root { --fundo: #f7f5f0; --painel: #fffdf9; --texto: #22303c; --suave: #5b6b78; --destaque: #1f6f78; --linha: #d9d5ca; --erro: #b5473c; --ok: #2e7d4f; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #15202a; --painel: #1c2a36; --texto: #e8ecef; --suave: #a3b1bc; --destaque: #6fc7cf; --linha: #2f3f4c; --erro: #f08a7e; --ok: #6fcf97; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto); font: 16px/1.5 "Segoe UI", system-ui, sans-serif; }
+header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding: 14px 20px; background: var(--painel); border-bottom: 1px solid var(--linha); }
+nav { display: flex; flex-wrap: wrap; gap: 16px; }
+a { color: var(--destaque); font-weight: 600; }
+main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { margin: 0 0 16px; font-size: 1.7rem; }
+h2 { margin: 0 0 12px; font-size: 1.15rem; }
+section { margin-bottom: 18px; padding: 18px; background: var(--painel); border: 1px solid var(--linha); border-radius: 10px; }
+.grade { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.em-linha { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+label { display: flex; flex: 1 1 170px; flex-direction: column; gap: 4px; font-size: .9rem; color: var(--suave); }
+input, select, button, .botao { min-height: 40px; padding: 8px 10px; font: inherit; color: var(--texto); background: var(--fundo); border: 1px solid var(--linha); border-radius: 6px; }
+button { color: var(--fundo); background: var(--destaque); border-color: var(--destaque); font-weight: 600; cursor: pointer; }
+.botao { text-decoration: none; }
+:focus-visible { outline: 2px solid var(--destaque); outline-offset: 1px; }
+.rolagem { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+th, td { padding: 8px; text-align: left; border-bottom: 1px solid var(--linha); white-space: nowrap; }
+th { color: var(--suave); }
+.aviso { margin: 0 0 14px; padding: 10px 12px; color: var(--ok); border: 1px solid currentColor; border-radius: 6px; }
+.aviso.erro { color: var(--erro); }
