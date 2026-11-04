@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block titulo %}Relatório{% endblock %}
+{% block conteudo %}
+<h1>Relatório mensal</h1>
+<section>
+  <form method="get" class="grade">
+    <label>Mês <input type="month" name="mes" value="{{ mes }}" required></label>
+    <button>Ver relatório</button>
+    <a class="botao" href="{{ url_for('relatorio_csv', mes=mes) }}">Exportar CSV</a>
+  </form>
+</section>
+<section>
+  <div class="rolagem"><table>
+    <thead><tr><th>Funcionário</th><th>Cargo</th><th>Horas</th><th>Dias trabalhados</th><th>Dias de atestado</th></tr></thead>
+    <tbody>
+    {% for linha in linhas %}
+      <tr><td>{{ linha.nome }}</td><td>{{ linha.cargo }}</td><td>{{ linha.horas }}</td><td>{{ linha.dias }}</td><td>{{ linha.atestado }}</td></tr>
+    {% else %}
+      <tr><td colspan="5">Nenhum funcionário cadastrado.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+{% endblock %}

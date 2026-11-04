@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titulo %}{% endblock %} | Controle de Ponto</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <strong>Controle de Ponto</strong>
+  <nav>
+    <a href="{{ url_for('ponto') }}">Ponto</a>
+    <a href="{{ url_for('funcionarios') }}">Funcionários</a>
+    <a href="{{ url_for('atestados') }}">Atestados</a>
+    <a href="{{ url_for('relatorio') }}">Relatório</a>
+  </nav>
+</header>
+<main>
+  {% for categoria, mensagem in get_flashed_messages(with_categories=true) %}
+    <p class="aviso {{ categoria }}" role="status">{{ mensagem }}</p>
+  {% endfor %}
+  {% block conteudo %}{% endblock %}
+</main>
+</body>
+</html>

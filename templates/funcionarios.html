@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block titulo %}Funcionários{% endblock %}
+{% block conteudo %}
+<h1>Funcionários</h1>
+<section>
+  <form method="post" class="grade">
+    <label>Nome <input name="nome" maxlength="80" required></label>
+    <label>Cargo <input name="cargo" maxlength="80" required></label>
+    <button>Cadastrar</button>
+  </form>
+</section>
+<section>
+  <div class="rolagem"><table>
+    <thead><tr><th>Nome</th><th>Cargo</th><th>Situação</th><th>Ações</th></tr></thead>
+    <tbody>
+    {% for pessoa in pessoas %}
+      <tr>
+        <td>{{ pessoa.nome }}</td><td>{{ pessoa.cargo }}</td><td>{{ 'Ativo' if pessoa.ativo else 'Inativo' }}</td>
+        <td class="em-linha">
+          <a href="{{ url_for('editar_funcionario', funcionario_id=pessoa.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('alternar_situacao', funcionario_id=pessoa.id) }}">
+            <button>{{ 'Desativar' if pessoa.ativo else 'Reativar' }}</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="4">Nenhum funcionário cadastrado.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block titulo %}Atestados{% endblock %}
+{% block conteudo %}
+<h1>Atestados</h1>
+<section>
+  <form method="post" class="grade">
+    <label>Funcionário
+      <select name="funcionario_id" required>
+        {% for pessoa in pessoas %}<option value="{{ pessoa.id }}">{{ pessoa.nome }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Data inicial <input type="date" name="data_inicio" required></label>
+    <label>Data final <input type="date" name="data_fim" required></label>
+    <label>Observação <input name="observacao" maxlength="120"></label>
+    <button>Registrar</button>
+  </form>
+</section>
+<section>
+  <div class="rolagem"><table>
+    <thead><tr><th>Funcionário</th><th>Início</th><th>Fim</th><th>Observação</th></tr></thead>
+    <tbody>
+    {% for atestado in atestados %}
+      <tr><td>{{ atestado.nome }}</td><td>{{ atestado.data_inicio|data }}</td><td>{{ atestado.data_fim|data }}</td><td>{{ atestado.observacao }}</td></tr>
+    {% else %}
+      <tr><td colspan="4">Nenhum atestado registrado.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+{% endblock %}

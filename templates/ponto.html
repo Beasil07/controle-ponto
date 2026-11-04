@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block titulo %}Ponto{% endblock %}
+{% block conteudo %}
+<h1>Registro de ponto</h1>
+<section>
+  <div class="rolagem"><table>
+    <thead><tr><th>Funcionário</th><th>Situação</th><th>Registrar</th></tr></thead>
+    <tbody>
+    {% for pessoa in pessoas %}
+      <tr>
+        <td>{{ pessoa.dados.nome }}</td>
+        <td>{% if pessoa.aberto %}Trabalhando desde {{ pessoa.aberto.entrada|data_hora }}{% else %}Fora do expediente{% endif %}</td>
+        <td>
+          <form method="post" action="{{ url_for('registrar_saida' if pessoa.aberto else 'registrar_entrada') }}" class="em-linha">
+            <input type="hidden" name="funcionario_id" value="{{ pessoa.dados.id }}">
+            <input type="datetime-local" name="momento" value="{{ agora }}" aria-label="Data e hora" required>
+            <button>{{ 'Registrar saída' if pessoa.aberto else 'Registrar entrada' }}</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="3">Cadastre um funcionário para começar.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+<section>
+  <h2>Últimos registros</h2>
+  <div class="rolagem"><table>
+    <thead><tr><th>Funcionário</th><th>Entrada</th><th>Saída</th></tr></thead>
+    <tbody>
+    {% for registro in registros %}
+      <tr><td>{{ registro.nome }}</td><td>{{ registro.entrada|data_hora }}</td><td>{{ registro.saida|data_hora }}</td></tr>
+    {% else %}
+      <tr><td colspan="3">Nenhum registro.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</section>
+{% endblock %}
